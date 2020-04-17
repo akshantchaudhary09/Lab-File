@@ -1,0 +1,38 @@
+/*Program to calculate number of nodes in Binary tree*/
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    struct node *lchild;
+    char info;
+    struct node *rchild;
+};
+struct node *getnode(char x);//To create node
+int numberOfNodes(struct node *p);//Returns number of nodes in the given binary tree
+
+int main()
+{
+    struct node *root=NULL;
+    root=getnode('P');
+    root->lchild=getnode('Q');
+    root->rchild=getnode('R');
+    root->lchild->lchild=getnode('A');
+    root->lchild->rchild=getnode('B');
+    root->rchild->lchild=getnode('X');
+
+    printf("Number of nodes in the tree are: %d",numberOfNodes(root));
+
+}
+struct node *getnode(char x)
+{
+  struct node *p=(struct node*)malloc(sizeof(struct node));
+  p->info=x;
+  p->lchild=p->rchild=NULL;
+}
+int numberOfNodes(struct node *p)
+{
+    if(p==NULL)
+        return 0;
+    return 1+numberOfNodes(p->lchild)+numberOfNodes(p->rchild);
+}
